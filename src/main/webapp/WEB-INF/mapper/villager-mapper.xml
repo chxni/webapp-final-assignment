@@ -15,5 +15,50 @@
         FROM VILLAGER_INFO A, VILLAGE_INFO B
         WHERE A.BELONG_VILLAGE = B.VILLAGE_CODE
     </entry>
+    <entry key="selectVillagerBySpecies">
+        SELECT VILLAGER_CODE
+                , VILLAGER_NAME
+                , GENDER
+                , BIRTH_DATE
+                , SPECIES
+                , PERSONALITY
+                , CATCHPHRASE
+        FROM VILLAGER_INFO
+        WHERE SPECIES = ?
+    </entry>
+    <entry key="selectVillagerByPersonality">
+        SELECT VILLAGER_CODE
+        , VILLAGER_NAME
+        , GENDER
+        , BIRTH_DATE
+        , SPECIES
+        , PERSONALITY
+        , CATCHPHRASE
+        FROM VILLAGER_INFO
+        WHERE PERSONALITY = ?
+    </entry>
+    <entry key="insertVillager">
+        INSERT
+            INTO VILLAGER
+            (
+                VILLAGER_NAME, GENDER, BIRTH_DATE, SPECIES
+                , PERSONALITY, CATCHPHRASE, BELONG_VILLAGE
+            )
+        VALUES
+            (
+                ?, ?, ?, ?
+                , ?, ?, 1
+            )
+    </entry>
+    <entry key="updateVillager">
+        UPDATE VILLAGER
+        SET BELONG_VILLAGE = ?
+        WHERE VILLAGER_NAME = ?
+    </entry>
+    <entry key="deleteVillager">
+        DELETE
+        FROM VILLAGER
+        WHERE VILLAGER_NAME = ?
+    </entry>
 
 </properties>
