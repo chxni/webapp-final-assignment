@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="selectAllVillagerList">
+        SELECT VILLAGER_CODE
+                , VILLAGER_NAME
+                , GENDER
+                , BIRTH_DATE
+                , SPECIES
+                , PERSONALITY
+                , CATCHPHRASE
+                , BELONG_VILLAGE
+                , VILLAGE_NAME
+                , CREATE_DATE
+        FROM VILLAGER_INFO A, VILLAGE_INFO B
+        WHERE A.BELONG_VILLAGE = B.VILLAGE_CODE
+    </entry>
+
+</properties>
