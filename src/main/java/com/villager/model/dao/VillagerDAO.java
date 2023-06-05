@@ -158,9 +158,11 @@ public class VillagerDAO {
         return villagerList;
     }
 
-    public void insertVillager(Connection con, VillagerDTO villager) {
+    public int insertVillager(Connection con, VillagerDTO villager) {
 
         PreparedStatement pstmt = null;
+
+        int result = 0;
 
         String query = prop.getProperty("insertVillager");
 
@@ -174,15 +176,21 @@ public class VillagerDAO {
             pstmt.setString(5, villager.getPersonality());
             pstmt.setString(6, villager.getCatchphrase());
 
+            result = pstmt.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             close(pstmt);
         }
+
+        return result;
     }
 
-    public void updateVillager(Connection con, VillagerDTO villagerDTO) {
+    public int updateVillager(Connection con, VillagerDTO villagerDTO) {
         PreparedStatement pstmt = null;
+
+        int result = 0;
 
         String query = prop.getProperty("updateVillager");
 
@@ -191,17 +199,22 @@ public class VillagerDAO {
 
             pstmt.setString(1, villagerDTO.getBelongVillage());
             pstmt.setString(2, villagerDTO.getVillagerName());
+
+            result = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             close(pstmt);
         }
 
+        return result;
     }
 
-    public void deleteVillager(Connection con, String villagerName) {
+    public int deleteVillager(Connection con, String villagerName) {
 
         PreparedStatement pstmt = null;
+
+        int result = 0;
 
         String query = prop.getProperty("deleteVillager");
 
@@ -210,11 +223,14 @@ public class VillagerDAO {
 
             pstmt.setString(1, villagerName);
 
+            result = pstmt.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             close(pstmt);
         }
-    }
 
+        return result;
+    }
 }
