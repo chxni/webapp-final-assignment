@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <entry key="selectAllVillagerList">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.villager-mapper.xml">
+
+    <resultMap type="com.villager.model.dto.VillagerDTO" id="villagerResultMap">
+        <id property="villagerCode" column="VILLAGE_CODE"/>
+        <result property="villagerName" column="VILLAGE_NAME"/>
+        <result property="gender" column="GENDER"/>
+        <result property="birthDate" column="BIRTH_DATE"/>
+        <result property="species" column="SPECIES"/>
+        <result property="personality" column="PERSONALITY"/>
+        <result property="catchphrase" column="CATCHPHRASE"/>
+        <result property="belongVillage" column="BELONG_VILLAGE"/>
+    </resultMap>
+
+    <resultMap id="villageResultMap" type="com.villager.model.dto.VillagerDTO">
+        <id property="villageCode" column="VILLAGE_CODE"/>
+        <result property="villageName" column="VILLAGE_NAME"/>
+        <result property="createDate" column="CREATE_DATE"/>
+    </resultMap>
+
+    <select id="selectAllVillagerList" resultMap="villagerResultMap, villageResultMap">
         SELECT VILLAGER_CODE
                 , VILLAGER_NAME
                 , GENDER
@@ -14,8 +32,8 @@
                 , CREATE_DATE
         FROM VILLAGER_INFO A, VILLAGE_INFO B
         WHERE A.BELONG_VILLAGE = B.VILLAGE_CODE
-    </entry>
-    <entry key="selectVillagerBySpecies">
+    </select>
+    <select id="selectVillagerBySpecies" resultMap="villagerResultMap, villageResultMap">
         SELECT VILLAGER_CODE
                 , VILLAGER_NAME
                 , GENDER
@@ -25,8 +43,8 @@
                 , CATCHPHRASE
         FROM VILLAGER_INFO
         WHERE SPECIES = ?
-    </entry>
-    <entry key="selectVillagerByPersonality">
+    </select>
+    <select id="selectVillagerByPersonality" resultMap="villagerResultMap, villageResultMap">
         SELECT VILLAGER_CODE
         , VILLAGER_NAME
         , GENDER
@@ -36,8 +54,8 @@
         , CATCHPHRASE
         FROM VILLAGER_INFO
         WHERE PERSONALITY = ?
-    </entry>
-    <entry key="insertVillager">
+    </select>
+    <insert id="insertVillager" parameterType="com.villager.model.dto.VillagerDTO">
         INSERT
             INTO VILLAGER
             (
@@ -49,16 +67,16 @@
                 ?, ?, ?, ?
                 , ?, ?, 1
             )
-    </entry>
-    <entry key="updateVillager">
+    </insert>
+    <update id="updateVillager" parameterType="com.villager.model.dto.VillagerDTO">
         UPDATE VILLAGER
         SET BELONG_VILLAGE = ?
         WHERE VILLAGER_NAME = ?
-    </entry>
-    <entry key="deleteVillager">
+    </update>
+    <delete id="deleteVillager">
         DELETE
         FROM VILLAGER
         WHERE VILLAGER_NAME = ?
-    </entry>
+    </delete>
 
-</properties>
+</mapper>
