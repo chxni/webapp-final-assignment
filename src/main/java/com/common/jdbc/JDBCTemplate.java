@@ -1,16 +1,12 @@
 package com.common.jdbc;
 
-import com.common.config.ConfigLocation;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
-import java.util.Properties;
 
 public class JDBCTemplate {
 

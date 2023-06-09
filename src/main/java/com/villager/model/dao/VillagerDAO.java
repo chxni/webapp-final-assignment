@@ -1,19 +1,19 @@
 package com.villager.model.dao;
 
+import com.common.config.SearchCondition;
 import com.villager.model.dto.VillagerDTO;
+
 import java.util.List;
 
 public interface VillagerDAO {
 
     List<VillagerDTO> selectAllVillagerList();
 
-    List<VillagerDTO> selectVillagerBySpecies();
+    List<VillagerDTO> selectVillagerByCondition(SearchCondition searchCondition);
 
-    List<VillagerDTO> selectVillagerByPersonality();
+    int insertVillager(VillagerDTO villager);
 
-    boolean insertVillager();
+    int updateVillager(VillagerDTO villager);
 
-    boolean updateVillager();
-
-    boolean deleteVillager();
+    int deleteVillager(VillagerDTO villager);
 }

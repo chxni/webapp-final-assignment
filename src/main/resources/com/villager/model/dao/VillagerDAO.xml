@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.villager.model.dao.VillagerDAO">
+
+    <resultMap type="com.villager.model.dto.VillagerDTO" id="villagerResultMap">
+        <id property="villagerCode" column="VILLAGER_CODE"/>
+        <result property="villagerName" column="VILLAGER_NAME"/>
+        <result property="gender" column="GENDER"/>
+        <result property="birthDate" column="BIRTH_DATE"/>
+        <result property="species" column="SPECIES"/>
+        <result property="personality" column="PERSONALITY"/>
+        <result property="catchphrase" column="CATCHPHRASE"/>
+        <result property="belongVillage" column="BELONG_VILLAGE"/>
+    </resultMap>
+
+    <select id="selectAllVillagerList" resultMap="villagerResultMap">
+        SELECT VILLAGER_CODE
+             , VILLAGER_NAME
+             , GENDER
+             , BIRTH_DATE
+             , SPECIES
+             , PERSONALITY
+             , CATCHPHRASE
+             , BELONG_VILLAGE
+        FROM VILLAGER_INFO
+    </select>
+
+    <select id="selectVillagerByCondition" parameterType="com.common.config.SearchCondition" resultMap="villagerResultMap">
+        SELECT VILLAGER_CODE
+                , VILLAGER_NAME
+                , GENDER
+                , BIRTH_DATE
+                , SPECIES
+                , PERSONALITY
+                , CATCHPHRASE
+        FROM VILLAGER_INFO
+        <where>
+            <choose>
+                <when test="'species'.equals(option)">
+                    SPECIES = #{value}
+                </when>
+                <when test="'personality'.equals(option)">
+                    PERSONALITY = #{value}
+                </when>
+            </choose>
+        </where>
+    </select>
+
+    <insert id="insertVillager" parameterType="com.villager.model.dto.VillagerDTO">
+        INSERT INTO VILLAGER_INFO (VILLAGER_NAME, GENDER, BIRTH_DATE, SPECIES, PERSONALITY, CATCHPHRASE, BELONG_VILLAGE)
+        VALUES (#{villagerName}, #{gender}, #{birthDate}, #{species}, #{personality}, #{catchphrase}, NULL)
+    </insert>
+
+    <update id="updateVillager" parameterType="com.villager.model.dto.VillagerDTO">
+        UPDATE VILLAGER_INFO
+        SET BELONG_VILLAGE = #{belongVillage}
+        WHERE VILLAGER_NAME = #{villagerName}
+    </update>
+
+    <delete id="deleteVillager" parameterType="com.villager.model.dto.VillagerDTO">
+        DELETE
+        FROM VILLAGER_INFO
+        WHERE VILLAGER_NAME = #{villagerName}
+    </delete>
+
+</mapper>
